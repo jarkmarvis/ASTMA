@@ -27,7 +27,6 @@ public static class AssertExtensions
             DateParseHandling = DateParseHandling.DateTime, // Parse dates as DateTime
             FloatParseHandling = FloatParseHandling.Decimal // Parse floating-point numbers as decimals
         };
-        var testc = new JsonSerializer();
         
         JToken expectedToken = JsonConvert.SerializeObject(expected, settings);
         JToken actualToken = JsonConvert.SerializeObject(actual, settings);

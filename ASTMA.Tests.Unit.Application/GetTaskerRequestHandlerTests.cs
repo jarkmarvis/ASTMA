@@ -7,10 +7,12 @@ using Moq;
 using NUnit.Framework;
 using System.Threading.Tasks;
 using System.Threading;
+using FluentAssertions;
+using System;
 
 namespace ASTMA.Tests.Unit.Application
 {
-    public class Tests
+    public class GetTaskerRequestHandlerTests
     {
         private Mock<ITaskerRepository> repository;
         private Mock<IMapper> mapper;
@@ -53,9 +55,42 @@ namespace ASTMA.Tests.Unit.Application
             var actual = await handler.Handle(request, CancellationToken.None);
 
             // Assert
-            AssertExtensions.Equivalent(expectedTasker, actual);
+            expectedTasker.Should().BeEquivalentTo(actual);
             repository.Verify(r => r.GetAsync(taskId), Times.Once);
             mapper.Verify(m => m.Map<Tasker>(taskerDto), Times.Once);
         }
+
+        [Test]
+        public async Task Handle_InvalidRequest_ThrowsArgumentNullException()
+        {
+            // Arrange
+            var handler = new GetTaskerRequestHandler(repository.Object, mapper.Object);
+            GetTaskerRequest request = null;
+
+            // Act
+            Func<Task> action = async () => await handler.Handle(request, CancellationToken.None);
+
+            // Assert
+            await action.Should().ThrowAsync<ArgumentNullException>()
+                        .WithMessage("Value cannot be null.");
+        }
+
+        [Test]
+        public async Task Handle_InvalidId_ThrowsArgumentException()
+        {
+            // Arrange
+            var handler = new GetTaskerRequestHandler(repository.Object, mapper.Object);
+            var request = new GetTaskerRequest { Id = 0 };
+
+            // Act
+            Func<Task> action = async () => await handler.Handle(request, CancellationToken.None);
+
+            // Assert
+            await action.Should().ThrowAsync<ArgumentException>()
+                        .WithParameterName(nameof(request.Id))
+                        .WithMessage("Id greater than 0 is required. (Parameter 'Id')");
+        }
+
+        //TODO Add more exceptions when the repo gets tied in.
     }
 }

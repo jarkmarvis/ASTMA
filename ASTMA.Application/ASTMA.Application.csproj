@@ -22,6 +22,7 @@
   <ItemGroup>
     <Folder Include="Common\Services\" />
     <Folder Include="Common\Exceptions\" />
+    <Folder Include="Taskers\Validators\" />
   </ItemGroup>
 
 </Project>
