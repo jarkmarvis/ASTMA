@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 
-namespace ASTMA.Infrastructure.Models;
+namespace ASTMA.Infrastructure.Documents;
 
 public class TaskerDocument
 {

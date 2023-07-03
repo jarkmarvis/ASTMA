@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ASTMA.Application\ASTMA.Application.csproj" />
+    <ProjectReference Include="..\ASTMA.Domain\ASTMA.Domain.csproj" />
+    <ProjectReference Include="..\ASTMA.WebAPI\ASTMA.WebUI.csproj" />
   </ItemGroup>
 
   <ItemGroup>

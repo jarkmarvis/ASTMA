@@ -1,5 +1,5 @@
 ﻿using ASTMA.Application.Common.Interfaces;
-using ASTMA.Infrastructure.Models;
+using ASTMA.Infrastructure.Documents;
 using MongoDB.Driver;
 
 namespace ASTMA.Infrastructure.Migrations;

@@ -3,7 +3,7 @@ using ASTMA.Application.Common.Models;
 using ASTMA.Application.Taskers.Commands.Create;
 using ASTMA.Application.Taskers.Commands.Update;
 using ASTMA.Application.Taskers.Queries.GetByFilter;
-using ASTMA.Infrastructure.Models;
+using ASTMA.Infrastructure.Documents;
 using AutoMapper;
 using MongoDB.Driver;
 
