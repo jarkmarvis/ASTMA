@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ASTMA.Infrastructure.Services
+namespace ASTMA.Application.Common.Interfaces
 {
-    internal class MongoService
+    public interface ITaskerService
     {
     }
 }
