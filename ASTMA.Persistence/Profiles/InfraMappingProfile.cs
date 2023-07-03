@@ -1,8 +1,8 @@
 ﻿using ASTMA.Application.Common.Models;
-using ASTMA.Infrastructure.Documents;
+using ASTMA.Infrastructure.Models;
 using AutoMapper;
 
-namespace ASTMA.Application.Profiles;
+namespace ASTMA.Infrastructure.Profiles;
 
 public class InfraMappingProfile : Profile
 {

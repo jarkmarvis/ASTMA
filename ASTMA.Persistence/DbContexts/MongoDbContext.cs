@@ -1,10 +1,10 @@
 ﻿using ASTMA.Application.Common.Interfaces;
 
-namespace ASTMA.Infrastructure.Persistence;
+namespace ASTMA.Infrastructure.DbContexts;
 
 using MongoDB.Driver;
 
-public class MongoDbContext<T> : IMongoDbContext<T>
+public class MongoDbContext<T> : IApplicationDbContext<T>
 {
     private IMongoClient _client;
     private IMongoDatabase _database;

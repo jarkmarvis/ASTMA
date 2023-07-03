@@ -1,4 +1,4 @@
-﻿namespace ASTMA.Application.Common.Models
+﻿namespace ASTMA.Application.Taskers.Queries.GetByFilter
 {
     /// <summary>
     /// Filters class for tasker objects

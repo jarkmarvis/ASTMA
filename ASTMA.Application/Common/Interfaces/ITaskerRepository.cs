@@ -1,5 +1,7 @@
 ﻿using ASTMA.Application.Common.Models;
 using ASTMA.Application.Taskers.Commands.Create;
+using ASTMA.Application.Taskers.Commands.Update;
+using ASTMA.Application.Taskers.Queries.GetByFilter;
 
 namespace ASTMA.Application.Common.Interfaces;
 
@@ -17,7 +19,7 @@ public interface ITaskerRepository
     /// </summary>
     /// <param name="id">Id of the tasker to retrieve</param>
     /// <returns>TaskerDto</returns>
-    Task<TaskerDto> GetAsync(int id);
+    Task<TaskerDto> GetAsync(string id);
 
     /// <summary>
     /// Retrieve a list of TaskerDtos filtered by args

@@ -4,54 +4,53 @@ using ASTMA.Domain.Entities;
 using AutoMapper;
 using MediatR;
 
-namespace ASTMA.Application.Taskers.Queries.GetById
-{
-    public class GetTaskerRequestHandler : IRequestHandler<GetTaskerRequest, Tasker>
-    {
-        private readonly ITaskerRepository _taskerRepository;
-        private readonly IMapper _mapper;
+namespace ASTMA.Application.Taskers.Queries.GetById;
 
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        /// <param name="taskerRepository">Tasker Repo</param>
-        /// <param name="mapper">Mapper</param>
-        public GetTaskerRequestHandler(ITaskerRepository taskerRepository, IMapper mapper)
+public class GetTaskerRequestHandler : IRequestHandler<GetTaskerRequest, Tasker>
+{
+    private readonly ITaskerRepository _taskerRepository;
+    private readonly IMapper _mapper;
+
+    /// <summary>
+    /// Ctor
+    /// </summary>
+    /// <param name="taskerRepository">Tasker Repo</param>
+    /// <param name="mapper">Mapper</param>
+    public GetTaskerRequestHandler(ITaskerRepository taskerRepository, IMapper mapper)
+    {
+        _taskerRepository = taskerRepository;
+        _mapper = mapper;
+    }
+
+    /// <summary>
+    /// Handler for getting a single Tasker
+    /// </summary>
+    /// <param name="request">Get request</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>TaskerDto</returns>
+    public async Task<Tasker> Handle(GetTaskerRequest request, CancellationToken cancellationToken)
+    {
+        //Validate request
+        //Handle exceptions
+
+        if (request == null)
         {
-            _taskerRepository = taskerRepository;
-            _mapper = mapper;
+            throw new ArgumentNullException();
         }
 
-        /// <summary>
-        /// Handler for getting a single Tasker
-        /// </summary>
-        /// <param name="request">Get request</param>
-        /// <param name="cancellationToken">Cancellation token</param>
-        /// <returns>TaskerDto</returns>
-        public async Task<Tasker> Handle(GetTaskerRequest request, CancellationToken cancellationToken)
+        if (String.IsNullOrEmpty(request.Id.Trim()))
         {
-            //Validate request
-            //Handle exceptions
+            throw new ArgumentException("Id is required.", nameof(request.Id));
+        }
 
-            if (request == null)
-            {
-                throw new ArgumentNullException();
-            }
-
-            if (!(request.Id > 0))
-            {
-                throw new ArgumentException("Id greater than 0 is required.", nameof(request.Id));
-            }
-
-            try
-            {
-                var result = await _taskerRepository.GetAsync(request.Id);
-                return _mapper.Map<Tasker>(result);
-            }
-            catch (Exception ex)
-            {
-                throw new ApplicationException("We don't yet know what happened.");
-            }
+        try
+        {
+            var result = await _taskerRepository.GetAsync(request.Id);
+            return _mapper.Map<Tasker>(result);
+        }
+        catch (Exception ex)
+        {
+            throw new ApplicationException("We don't yet know what happened.");
         }
     }
 }

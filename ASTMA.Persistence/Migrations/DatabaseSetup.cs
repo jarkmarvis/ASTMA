@@ -1,17 +1,14 @@
 ﻿using ASTMA.Application.Common.Interfaces;
-using ASTMA.Infrastructure.Documents;
-using MongoDB.Bson;
+using ASTMA.Infrastructure.Models;
 using MongoDB.Driver;
 
-
-namespace ASTMA.Infrastructure.Persistence.Migration;
-
+namespace ASTMA.Infrastructure.Migrations;
 
 public class DatabaseSetup
 {
-    private readonly IMongoDbContext<TaskerDocument> _context;
+    private readonly IApplicationDbContext<TaskerDocument> _context;
 
-    public DatabaseSetup(IMongoDbContext<TaskerDocument> context)
+    public DatabaseSetup(IApplicationDbContext<TaskerDocument> context)
     {
         _context = context;
     }
@@ -34,7 +31,7 @@ public class DatabaseSetup
     {
         var tasker = new TaskerDocument
         {
-            Id = 1,
+            Id = "taskerId",
             Title = "Sample Task",
             Description = "A Sample task",
             DateCreated = DateTime.UtcNow,

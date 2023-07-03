@@ -5,7 +5,7 @@
         /// <summary>
         /// Id of the object
         /// </summary>
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// DateTime the entity was created

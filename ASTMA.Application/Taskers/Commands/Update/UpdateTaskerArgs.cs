@@ -1,4 +1,4 @@
-﻿namespace ASTMA.Application.Taskers.Commands.Create;
+﻿namespace ASTMA.Application.Taskers.Commands.Update;
 
 public class UpdateTaskerArgs
 {

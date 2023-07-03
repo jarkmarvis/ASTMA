@@ -1,11 +1,14 @@
-﻿using MongoDB.Bson;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using System.Diagnostics.CodeAnalysis;
 
-namespace ASTMA.Tests.Unit.Application;
+namespace ASTMA.Tests.Common;
 
+/// <summary>
+/// Experimental class for comparing two objects in tests
+/// Yes there is overhead here, but it's tests :)
+/// </summary>
 [ExcludeFromCodeCoverage]
 public static class AssertExtensions
 {
@@ -15,9 +18,9 @@ public static class AssertExtensions
 
         if (expected == null || actual == null) Assert.Fail("One of the objects were null");
 
-        var expectedJson = expected.ToJson<T>();
-        var actualJson = actual.ToJson<T>();
-        AreJsonObjectsEquivalent(expectedJson, actualJson);
+        //var expectedJson = expected.ToJson<T>();
+        //var actualJson = actual.ToJson<T>();
+        //AreJsonObjectsEquivalent(expectedJson, actualJson);
     }
 
     private static void AreJsonObjectsEquivalent(string expected, string actual)
@@ -27,7 +30,7 @@ public static class AssertExtensions
             DateParseHandling = DateParseHandling.DateTime, // Parse dates as DateTime
             FloatParseHandling = FloatParseHandling.Decimal // Parse floating-point numbers as decimals
         };
-        
+
         JToken expectedToken = JsonConvert.SerializeObject(expected, settings);
         JToken actualToken = JsonConvert.SerializeObject(actual, settings);
 

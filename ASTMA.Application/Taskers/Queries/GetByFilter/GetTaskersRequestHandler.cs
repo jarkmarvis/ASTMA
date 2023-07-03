@@ -29,7 +29,7 @@ namespace ASTMA.Application.Taskers.Queries.GetByFilter
         /// <returns>List of TaskerDtos</returns>
         public async Task<List<TaskerDto>> Handle(GetTaskersRequest request, CancellationToken cancellationToken)
         {
-            var args = _mapper.Map<Common.Models.GetTaskerArgs>(request.parameters);
+            var args = _mapper.Map<GetTaskerArgs>(request.parameters);
             var taskers = await _taskerRepository.GetAsync(args);
             return _mapper.Map<List<TaskerDto>>(taskers);
         }

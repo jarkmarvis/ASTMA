@@ -1,7 +1,9 @@
 ﻿using ASTMA.Application.Common.Interfaces;
 using ASTMA.Application.Common.Models;
 using ASTMA.Application.Taskers.Commands.Create;
-using ASTMA.Infrastructure.Documents;
+using ASTMA.Application.Taskers.Commands.Update;
+using ASTMA.Application.Taskers.Queries.GetByFilter;
+using ASTMA.Infrastructure.Models;
 using AutoMapper;
 using MongoDB.Driver;
 
@@ -9,7 +11,7 @@ namespace ASTMA.Infrastructure.Repositories;
 
 public class TaskerRepository : ITaskerRepository
 {
-    private readonly IMongoDbContext<TaskerDocument> _context;
+    private readonly IApplicationDbContext<TaskerDocument> _context;
     private readonly IMapper _mapper;
 
     /// <summary>
@@ -17,7 +19,7 @@ public class TaskerRepository : ITaskerRepository
     /// </summary>
     /// <param name="context">IMongoDbContext<TaskerDocument></param>
     /// <param name="mapper">IMapper</param>
-    public TaskerRepository(IMongoDbContext<TaskerDocument> context, IMapper mapper)
+    public TaskerRepository(IApplicationDbContext<TaskerDocument> context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
@@ -30,7 +32,7 @@ public class TaskerRepository : ITaskerRepository
     }
 
     /// <inheritdoc />
-    public async Task<TaskerDto> GetAsync(int id)
+    public async Task<TaskerDto> GetAsync(string id)
     {
         var filter = Builders<TaskerDocument>.Filter.Eq(t => t.Id, id);
         var result = await _context.Collection.Find(filter).FirstOrDefaultAsync();

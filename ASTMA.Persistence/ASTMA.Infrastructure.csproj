@@ -11,7 +11,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Persistence\Migration\Steps\" />
+    <Folder Include="Documents\" />
+    <Folder Include="Migrations\Steps\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Driver" Version="2.20.0" />
   </ItemGroup>
 
 </Project>
