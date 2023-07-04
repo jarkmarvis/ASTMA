@@ -3,6 +3,7 @@ using ASTMA.Application.Common.Models;
 using ASTMA.Application.Taskers.Commands.Create;
 using ASTMA.Application.Taskers.Commands.Update;
 using ASTMA.Application.Taskers.Queries.GetByFilter;
+using ASTMA.Domain.Entities;
 using ASTMA.Infrastructure.Documents;
 using AutoMapper;
 using MongoDB.Driver;
@@ -26,21 +27,21 @@ public class TaskerRepository : ITaskerRepository
     }
 
     /// <inheritdoc />
-    public Task<TaskerDto> CreateAsync(CreateTaskerArgs args)
+    public Task<Tasker> CreateAsync(CreateTaskerArgs args)
     {
         throw new NotImplementedException();
     }
 
     /// <inheritdoc />
-    public async Task<TaskerDto> GetAsync(string id)
+    public async Task<Tasker> GetAsync(string id)
     {
         var filter = Builders<TaskerDocument>.Filter.Eq(t => t.Id, id);
         var result = await _context.Collection.Find(filter).FirstOrDefaultAsync();
-        return _mapper.Map<TaskerDto>(result);
+        return _mapper.Map<Tasker>(result);
     }
 
     /// <inheritdoc />
-    public async Task<IEnumerable<TaskerDto>> GetAsync(GetTaskerArgs args)
+    public async Task<IEnumerable<Tasker>> GetAsync(GetTaskerArgs args)
     {
         //var filter = Builders<TaskerDocument>.Filter.Eq(t => t.Title, args.Title);
         //var result = await _context.Collection.Find(filter).ToListAsync();
@@ -49,7 +50,7 @@ public class TaskerRepository : ITaskerRepository
     }
 
     /// <inheritdoc />
-    public Task<TaskerDto> UpdateAsync(UpdateTaskerArgs args)
+    public Task<Tasker> UpdateAsync(UpdateTaskerArgs args)
     {
         //    var filter = Builders<User>.Filter.Eq(u => u.Id, user.Id);
         //    await _context.Collection.ReplaceOneAsync(filter, user);
@@ -57,7 +58,7 @@ public class TaskerRepository : ITaskerRepository
     }
 
     /// <inheritdoc />
-    public Task<TaskerDto> DeleteAsync(int id)
+    public Task<Tasker> DeleteAsync(int id)
     {
         //    var filter = Builders<User>.Filter.Eq(u => u.Id, id);
         //    await _context.Collection.DeleteOneAsync(filter);

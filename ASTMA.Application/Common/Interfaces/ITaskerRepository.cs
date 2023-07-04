@@ -2,6 +2,7 @@
 using ASTMA.Application.Taskers.Commands.Create;
 using ASTMA.Application.Taskers.Commands.Update;
 using ASTMA.Application.Taskers.Queries.GetByFilter;
+using ASTMA.Domain.Entities;
 
 namespace ASTMA.Application.Common.Interfaces;
 
@@ -11,33 +12,33 @@ public interface ITaskerRepository
     /// Create a new tasker
     /// </summary>
     /// <param name="args">Args to create the tasker</param>
-    /// <returns>TaskerDto</returns>
-    Task<TaskerDto> CreateAsync(CreateTaskerArgs args);
+    /// <returns>Tasker</returns>
+    Task<Tasker> CreateAsync(CreateTaskerArgs args);
 
     /// <summary>
     /// Retrieve a tasker by id
     /// </summary>
     /// <param name="id">Id of the tasker to retrieve</param>
-    /// <returns>TaskerDto</returns>
-    Task<TaskerDto> GetAsync(string id);
+    /// <returns>Tasker</returns>
+    Task<Tasker> GetAsync(string id);
 
     /// <summary>
-    /// Retrieve a list of TaskerDtos filtered by args
+    /// Retrieve a list of Tasker filtered by args
     /// </summary>
-    /// <returns>List of TaskerDtos</returns>
-    Task<IEnumerable<TaskerDto>> GetAsync(GetTaskerArgs args);
+    /// <returns>List of Tasker</returns>
+    Task<IEnumerable<Tasker>> GetAsync(GetTaskerArgs args);
 
     /// <summary>
     /// Create a new tasker
     /// </summary>
     /// <param name="args">Args to create the tasker</param>
-    /// <returns>TaskerDto</returns>
-    Task<TaskerDto> UpdateAsync(UpdateTaskerArgs args);
+    /// <returns>Tasker</returns>
+    Task<Tasker> UpdateAsync(UpdateTaskerArgs args);
 
     /// <summary>
     /// Create a new tasker
     /// </summary>
     /// <param name="id">Id of the tasker to delete</param>
-    /// <returns>TaskerDto</returns>
-    Task<TaskerDto> DeleteAsync(int id);
+    /// <returns>Tasker</returns>
+    Task<Tasker> DeleteAsync(int id);
 }

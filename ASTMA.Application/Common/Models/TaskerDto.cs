@@ -1,6 +1,12 @@
-﻿namespace ASTMA.Application.Common.Models;
+﻿using ASTMA.Application.Common.Mappings;
+using ASTMA.Domain.Entities;
 
-public class TaskerDto : BaseDto
+namespace ASTMA.Application.Common.Models;
+
+/// <summary>
+/// Data transfer object for tasker used to 
+/// </summary>
+public class TaskerDto : IMapFrom<Tasker>
 {
     /// <summary>
     /// The task's Title < 50 characters

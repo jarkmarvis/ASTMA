@@ -25,7 +25,25 @@ public abstract class BaseEntity
     public DateTime DateCreated { get; private set; }
 
     /// <summary>
+    /// Setter for DateCreated
+    /// </summary>
+    /// <param name="date">The date to set</param>
+    public void SetDateCreated(DateTime date)
+    {
+        DateCreated = date;
+    }
+
+    /// <summary>
     /// DateTime the entity was updated
     /// </summary>
     public DateTime DateUpdated { get; private set; }
+
+    /// <summary>
+    /// Setter for DateUpdated
+    /// </summary>
+    /// <param name="date">The date to set</param>
+    public void SetDateUpdated(DateTime date)
+    {
+        DateUpdated = date;
+    }
 }

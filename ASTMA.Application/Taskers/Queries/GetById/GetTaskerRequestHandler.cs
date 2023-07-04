@@ -1,12 +1,13 @@
 ﻿using System;
 using ASTMA.Application.Common.Interfaces;
+using ASTMA.Application.Common.Models;
 using ASTMA.Domain.Entities;
 using AutoMapper;
 using MediatR;
 
 namespace ASTMA.Application.Taskers.Queries.GetById;
 
-public class GetTaskerRequestHandler : IRequestHandler<GetTaskerRequest, Tasker>
+public class GetTaskerRequestHandler : IRequestHandler<GetTaskerRequest, TaskerDto>
 {
     private readonly ITaskerRepository _taskerRepository;
     private readonly IMapper _mapper;
@@ -28,7 +29,7 @@ public class GetTaskerRequestHandler : IRequestHandler<GetTaskerRequest, Tasker>
     /// <param name="request">Get request</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>TaskerDto</returns>
-    public async Task<Tasker> Handle(GetTaskerRequest request, CancellationToken cancellationToken)
+    public async Task<TaskerDto> Handle(GetTaskerRequest request, CancellationToken cancellationToken)
     {
         //Validate request
         //Handle exceptions
@@ -46,7 +47,7 @@ public class GetTaskerRequestHandler : IRequestHandler<GetTaskerRequest, Tasker>
         try
         {
             var result = await _taskerRepository.GetAsync(request.Id);
-            return _mapper.Map<Tasker>(result);
+            return _mapper.Map<TaskerDto>(result);
         }
         catch (Exception ex)
         {

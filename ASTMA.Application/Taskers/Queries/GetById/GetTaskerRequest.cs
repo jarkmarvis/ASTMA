@@ -1,4 +1,4 @@
-﻿using ASTMA.Domain.Entities;
+﻿using ASTMA.Application.Common.Models;
 using MediatR;
 
 namespace ASTMA.Application.Taskers.Queries.GetById;
@@ -6,10 +6,10 @@ namespace ASTMA.Application.Taskers.Queries.GetById;
 /// <summary>
 /// Request to get a single Tasker
 /// </summary>
-public class GetTaskerRequest : IRequest<Tasker>
+public class GetTaskerRequest : IRequest<TaskerDto>
 {
     /// <summary>
     /// The Id of the tasker
     /// </summary>
-    public string Id { get; set; }
+    public string Id { get; set; } = null!;
 }
