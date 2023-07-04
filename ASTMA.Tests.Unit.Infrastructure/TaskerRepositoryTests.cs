@@ -4,7 +4,7 @@ using AutoMapper;
 using MongoDB.Driver;
 using Moq;
 using FluentAssertions;
-using ASTMA.Infrastructure.Models;
+using ASTMA.Infrastructure.Documents;
 
 namespace ASTMA.Tests.Unit.Infrastructure;
 

@@ -1,7 +1,5 @@
-﻿using System;
-using ASTMA.Application.Common.Interfaces;
+﻿using ASTMA.Application.Common.Interfaces;
 using ASTMA.Application.Common.Models;
-using ASTMA.Domain.Entities;
 using AutoMapper;
 using MediatR;
 

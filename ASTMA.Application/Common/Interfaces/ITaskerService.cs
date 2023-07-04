@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ASTMA.Application.Common.Interfaces
+﻿namespace ASTMA.Application.Common.Interfaces
 {
     public interface ITaskerService
     {
+        //TODO setup service interface for database transaction
     }
 }

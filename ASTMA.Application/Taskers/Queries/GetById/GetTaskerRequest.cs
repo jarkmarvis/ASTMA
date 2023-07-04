@@ -6,7 +6,7 @@ namespace ASTMA.Application.Taskers.Queries.GetById;
 /// <summary>
 /// Request to get a single Tasker
 /// </summary>
-public class GetTaskerRequest : IRequest<TaskerDto>
+public record GetTaskerRequest : IRequest<TaskerDto>
 {
     /// <summary>
     /// The Id of the tasker

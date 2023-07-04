@@ -35,12 +35,13 @@ public class GetTaskerRequestHandlerTests
         var handler = new GetTaskerRequestHandler(repository.Object, mapper.Object);
         var request = new GetTaskerRequest { Id = taskId };
 
-        var taskerDto = new TaskerDto 
+        var tasker = new Tasker 
         { 
-            Id = taskId, 
             Title = title, 
             Description = description 
         };
+        tasker.SetId(taskId);
+
         var expectedTasker = new Tasker
         {
             Title = title,
@@ -48,7 +49,7 @@ public class GetTaskerRequestHandlerTests
         };
         expectedTasker.SetId(taskId);
 
-        repository.Setup(r => r.GetAsync(It.IsAny<string>())).ReturnsAsync(taskerDto);
+        repository.Setup(r => r.GetAsync(It.IsAny<string>())).ReturnsAsync(tasker);
         mapper.Setup(m => m.Map<Tasker>(It.IsAny<TaskerDto>())).Returns(expectedTasker);
 
         // Act
@@ -57,7 +58,7 @@ public class GetTaskerRequestHandlerTests
         // Assert
         expectedTasker.Should().BeEquivalentTo(actual);
         repository.Verify(r => r.GetAsync(taskId), Times.Once);
-        mapper.Verify(m => m.Map<Tasker>(taskerDto), Times.Once);
+        mapper.Verify(m => m.Map<Tasker>(tasker), Times.Once);
     }
 
     [Test]

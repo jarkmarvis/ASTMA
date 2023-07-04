@@ -1,30 +1,28 @@
 using ASTMA.Application.Common.Models;
 using ASTMA.Application.Taskers.Queries.GetById;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ASTMA.WebUI.Controllers
+namespace ASTMA.WebUI.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class TaskerController : ApiControllerBase
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class TaskerController : ControllerBase
+    private readonly ILogger<TaskerController> _logger;
+
+    public TaskerController(ILogger<TaskerController> logger)
     {
-        private readonly ILogger<TaskerController> _logger;
+        _logger = logger;
+    }
 
-        public TaskerController(ILogger<TaskerController> logger)
+    [HttpGet("{id}", Name = "GetTasker")]
+    public async Task<ActionResult<TaskerDto>> GetTaskerAsync(string id, GetTaskerRequest query)
+    {
+        if (id != query.Id)
         {
-            _logger = logger;
+            return BadRequest();
         }
 
-        [HttpGet("{id}", Name = "GetTasker")]
-        public async Task<ActionResult<TaskerDto>> GetTaskerAsync(string id, GetTaskerRequest query)
-        {
-            if (id != query.Id)
-            {
-                return BadRequest();
-            }
-
-            return await Mediator.Send(query);
-        }
+        return await Mediator.Send(query);
     }
 }

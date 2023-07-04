@@ -22,7 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ASTMA.Application\ASTMA.Application.csproj" />
-    <ProjectReference Include="..\ASTMA.Persistence\ASTMA.Infrastructure.csproj" />
+    <ProjectReference Include="..\ASTMA.Infrastructure\ASTMA.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

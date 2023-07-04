@@ -9,12 +9,17 @@ namespace ASTMA.Application.Common.Models;
 public class TaskerDto : IMapFrom<Tasker>
 {
     /// <summary>
-    /// The task's Title < 50 characters
+    /// The tasker's id
+    /// </summary>
+    public string Id { get; set; }
+
+    /// <summary>
+    /// The tasker's Title < 50 characters
     /// </summary>
     public string? Title { get; set; }
 
     /// <summary>
-    /// The task's Description < 250 characters
+    /// The tasker's Description < 250 characters
     /// </summary>
     public string? Description { get; set; }
 }
