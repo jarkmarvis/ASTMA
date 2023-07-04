@@ -35,30 +35,26 @@ public class GetTaskerRequestHandlerTests
         var handler = new GetTaskerRequestHandler(repository.Object, mapper.Object);
         var request = new GetTaskerRequest { Id = taskId };
 
-        var tasker = new Tasker 
-        { 
-            Title = title, 
-            Description = description 
-        };
+        var tasker = new Tasker { Title = title, Description = description };
         tasker.SetId(taskId);
 
-        var expectedTasker = new Tasker
+        var expectedTaskerDto = new TaskerDto
         {
+            Id = taskId,
             Title = title,
             Description = description
         };
-        expectedTasker.SetId(taskId);
 
         repository.Setup(r => r.GetAsync(It.IsAny<string>())).ReturnsAsync(tasker);
-        mapper.Setup(m => m.Map<Tasker>(It.IsAny<TaskerDto>())).Returns(expectedTasker);
+        mapper.Setup(m => m.Map<TaskerDto>(It.IsAny<Tasker>())).Returns(expectedTaskerDto);
 
         // Act
         var actual = await handler.Handle(request, CancellationToken.None);
 
         // Assert
-        expectedTasker.Should().BeEquivalentTo(actual);
+        expectedTaskerDto.Should().BeEquivalentTo(actual);
         repository.Verify(r => r.GetAsync(taskId), Times.Once);
-        mapper.Verify(m => m.Map<Tasker>(tasker), Times.Once);
+        mapper.Verify(m => m.Map<TaskerDto>(tasker), Times.Once);
     }
 
     [Test]
@@ -77,11 +73,14 @@ public class GetTaskerRequestHandlerTests
     }
 
     [Test]
-    public async Task Handle_InvalidId_ThrowsArgumentException()
+    [TestCase("")]
+    [TestCase(" ")]
+    [TestCase(null)]
+    public async Task Handle_InvalidId_ThrowsArgumentException(string taskerId)
     {
         // Arrange
         var handler = new GetTaskerRequestHandler(repository.Object, mapper.Object);
-        var request = new GetTaskerRequest { Id = "taskerId" };
+        var request = new GetTaskerRequest { Id = taskerId };
 
         // Act
         Func<Task> action = async () => await handler.Handle(request, CancellationToken.None);
@@ -89,7 +88,7 @@ public class GetTaskerRequestHandlerTests
         // Assert
         await action.Should().ThrowAsync<ArgumentException>()
                     .WithParameterName(nameof(request.Id))
-                    .WithMessage("Id greater than 0 is required. (Parameter 'Id')");
+                    .WithMessage("Id is required. (Parameter 'Id')");
     }
 
     //TODO Add more exceptions when the repo gets tied in.

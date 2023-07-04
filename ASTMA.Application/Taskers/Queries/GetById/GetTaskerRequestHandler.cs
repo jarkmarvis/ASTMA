@@ -37,7 +37,7 @@ public class GetTaskerRequestHandler : IRequestHandler<GetTaskerRequest, TaskerD
             throw new ArgumentNullException();
         }
 
-        if (String.IsNullOrEmpty(request.Id.Trim()))
+        if (String.IsNullOrEmpty(request.Id?.Trim()))
         {
             throw new ArgumentException("Id is required.", nameof(request.Id));
         }
@@ -45,7 +45,8 @@ public class GetTaskerRequestHandler : IRequestHandler<GetTaskerRequest, TaskerD
         try
         {
             var result = await _taskerRepository.GetAsync(request.Id);
-            return _mapper.Map<TaskerDto>(result);
+            var testc = _mapper.Map<TaskerDto>(result);
+            return testc;
         }
         catch (Exception ex)
         {
